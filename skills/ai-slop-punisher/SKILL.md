@@ -264,7 +264,7 @@ After:
 
 #### C2. Negative parallelisms
 
-Patterns to watch: a first clause that sets up a foil, and a second clause that delivers the real point. Common shapes include "not just X, but Y" and "X rather than Y" and "It's not just about X, it's Y." The tailing-negation fragment is a sibling: a "no guessing" or "no wasted motion" stuck on at the end of a sentence. A further variant restates a restrictive "just" or "only" with a redundant negative tail: "produces just the translated string, nothing else."
+Patterns to watch: a first clause that sets up a foil, and a second clause that delivers the real point. Common shapes include "not just X, but Y" and "X rather than Y" and "It's not just about X, it's Y." The tailing-negation fragment is a sibling: a "no guessing" or "no wasted motion" stuck on at the end of a sentence. Its positive counterpart, the comma-appended scope tail (", on every request"), is under C13. A further variant restates a restrictive "just" or "only" with a redundant negative tail: "produces just the translated string, nothing else."
 
 Why this is wrong: the construction sets up a fake contrast to make the second clause stick. A real point does not need a foil. In the redundant-tail variant, "nothing else" says the same thing "just" already said, just louder.
 
@@ -430,15 +430,27 @@ After:
 
 #### C13. Verbless fragment stacking
 
-Pattern: a relative or main clause followed by one or more trailing noun-phrase fragments, set off by commas, that have no subject or verb at all ("...a `Promise<Uint8Array[]>`, one PNG per array entry, a single image by default unless we ask for more"). Distinct from C4, which drops the subject but keeps an implied verb, and from C2, which sets up a foil: here the fragments are bare appositives with nothing predicating them.
+Pattern: a relative or main clause followed by one or more trailing noun-phrase fragments, set off by commas, that have no subject or verb at all ("...a `Promise<Uint8Array[]>`, one PNG per array entry, a single image by default unless we ask for more"). Distinct from C4, which drops the subject but keeps an implied verb, and from C2, which sets up a foil: here the fragments are bare appositives with nothing predicating them. A distinct sub-case is the comma-appended scope tail: a sentence that is already complete gets a comma and a trailing prepositional phrase as a closing beat, most often with a universal quantifier (", on every request," ", across every engine," ", every time"). It is the positive sibling of C2's tailing-negation fragment.
 
 Why this is wrong: each fragment adds a distinct fact, but stacking them onto one sentence through bare commas asks the reader to supply the missing verb for each one. Splitting each fact into its own sentence, or giving each fragment its own verb, reads clearer. Exempt for flat reference documentation, where terse fact-stacking is expected (see What NOT to Flag, "Reference doc flatness").
+
+The scope tail is a cadence move. The comma detaches the phrase from the verb it modifies and turns a plain restrictive scope into an afterthought. Run a deletion test. If deleting the tail loses nothing, it is flourish, so cut it. If deleting it loses a real limit (which engines, which requests), keep the content and attach it to the verb with no comma, moving any phrase wedged in between to the front of the sentence. A scope phrase with no comma before it ("runs a check on every engine that has a fitter") is ordinary English and is not a hit.
 
 Before:
 > `diffusion()` returns a `DiffusionResult` whose `outputs` field is a `Promise<Uint8Array[]>`, one PNG per array entry, a single image by default unless we ask for more.
 
 After:
 > `diffusion()` returns a `DiffusionResult`. Its `outputs` field is a `Promise<Uint8Array[]>`, one PNG per entry, a single image by default unless you ask for more.
+
+Before:
+> The SDK also runs a second check on its own, right before it loads a model, on every engine that has a fitter.
+>
+> The cache returns the stored value, every time.
+
+After:
+> Right before it loads a model, the SDK also runs a second check of its own on every engine that has a fitter.
+>
+> The cache returns the stored value.
 
 #### C14. Nominalized action via copula
 
