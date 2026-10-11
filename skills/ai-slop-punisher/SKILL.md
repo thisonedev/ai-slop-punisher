@@ -314,7 +314,7 @@ Ordinary passive is acceptable when the actor is unknown or irrelevant.
 
 #### C5. Rhythmic signs
 
-Words to watch: a clause wedged into the middle of a subject-verb pair, set off by commas or parens. Three-plus consecutive sentences under eight words. "The first wall is... The second wall is..." numbered list in paragraph clothes. "Short sentence. Then another. Then another." parataxis. Every paragraph the same length, same template. A sentence that opens with a backticked reference and never names a verb. A single colon-introduced sentence running a conditional, an action, and a purpose. Parallel doubling: two consecutive sentences with different subjects sharing the same verb and sentence shape ("[A] shows X. [B] shows Y.") to imply a comparison instead of a comparison word.
+Words to watch: a clause wedged into the middle of a subject-verb pair, set off by commas or parens. Three-plus consecutive sentences under eight words. "The first wall is... The second wall is..." numbered list in paragraph clothes. "Short sentence. Then another. Then another." parataxis. Every paragraph the same length, same template. A sentence that opens with a backticked reference and never names a verb. A single colon-introduced sentence running a conditional, an action, and a purpose. Parallel doubling: two consecutive sentences, or two clauses joined by a bare "and," with different subjects and a matching sentence shape, often the same verb ("[A] shows X. [B] shows Y." or "[A] stays X, and [B] sets Y") to imply a comparison instead of a comparison word.
 
 Why this is wrong: the prose has a structural rhythm or template that the content does not need. The reader feels the cadence before the meaning. Each pattern is a different way the model imposes a structure on the prose. Parallel doubling in particular borrows the shape of a comparison without the word that would make it one, so the reader has to infer the relationship the sentence never states.
 
@@ -329,6 +329,12 @@ Before:
 
 After:
 > The completion chapters show what the model returned. Underneath it, the logging stream carries every server-side SDK event and per-model log line in real time, over the same RPC the rest of the SDK uses.
+
+Before:
+> `get_weather` stays in the prompt, and the two astrology tools set `deferLoading: true`.
+
+After:
+> `get_weather` stays in the prompt, while the two astrology tools are deferred with `deferLoading: true`.
 
 #### C6. Repetition and variation
 
@@ -737,15 +743,15 @@ After:
 
 #### G2. Anthropomorphization
 
-Patterns: the model sees, the model decides, the model thinks, the model wants, the model knows, the model chooses. "As an AI," "as a language model," "I am a large language model." Hallucinate, hallucinates, hallucinated. Beyond the model: hands, hands us, hands back, gives us, gives you (as a human handing gesture standing in for a non-human software component, such as an SDK, a function, or a callback, passing or returning a value) → use passes, invokes with, calls back with, returns instead. where the model is, how far the model has to go, the model is at step N (a spatial or journey metaphor for a progress counter) → name the counter directly (current step, steps remaining, step N of M).
+Patterns: the model sees, the model decides, the model thinks, the model wants, the model knows, the model chooses. "As an AI," "as a language model," "I am a large language model." Hallucinate, hallucinates, hallucinated. Beyond the model: hands, hands us, hands back, gives us, gives you (as a human handing gesture standing in for a non-human software component, such as an SDK, a function, or a callback, passing or returning a value) → use passes, invokes with, calls back with, returns instead. where the model is, how far the model has to go, the model is at step N (a spatial or journey metaphor for a progress counter) → name the counter directly (current step, steps remaining, step N of M). sets, declares, opts in, asks for (a tool definition, config object, or route described as performing the configuration a developer wrote: "the two tools set `deferLoading: true`") → name the developer as the actor (we set, you set) or state the resulting property (is deferred with, has). Exempt when the code performs the action at runtime (a constructor that sets a field, a module that registers itself on import).
 
-Why this is wrong: the model is described as a person with intentions. The next sampled token is not a decision. The prompt including the image is not the model seeing it. State the concrete event. Drop the imagined inner life. The same failure extends past "the model": an SDK or callback described as "handing" data to a person borrows a social gesture for a mechanical invocation. Name the mechanism instead. "Where the model is" and "how far it has to go" borrow a journey for a plain progress counter: the model has no location and no road ahead of it, only a step count.
+Why this is wrong: the model is described as a person with intentions. The next sampled token is not a decision. The prompt including the image is not the model seeing it. State the concrete event. Drop the imagined inner life. The same failure extends past "the model": an SDK or callback described as "handing" data to a person borrows a social gesture for a mechanical invocation. Name the mechanism instead. "Where the model is" and "how far it has to go" borrow a journey for a plain progress counter: the model has no location and no road ahead of it, only a step count. A tool definition that "sets" its own flag is the same borrowing applied to static configuration: the definition is data, the developer wrote the flag, and the active verb hides who did.
 
 Before:
-> The model sees the image and decides whether to call the tool. The LLM hallucinates the cache key when the key is missing. The SDK invokes it repeatedly while the model downloads, each time handing us `{ percentage, downloaded, total }`. `step` and `totalSteps` tell you where the model is and how far it has to go.
+> The model sees the image and decides whether to call the tool. The LLM hallucinates the cache key when the key is missing. The SDK invokes it repeatedly while the model downloads, each time handing us `{ percentage, downloaded, total }`. `step` and `totalSteps` tell you where the model is and how far it has to go. The two astrology tools set `deferLoading: true`.
 
 After:
-> The prompt includes the image. The next sampled token may be a tool call. When the key is missing, the SDK returns the cache miss and the call falls back to the source. The SDK invokes it repeatedly while the model downloads, each time passing `{ percentage, downloaded, total }`. `step` and `totalSteps` tell you the current step and how many steps remain.
+> The prompt includes the image. The next sampled token may be a tool call. When the key is missing, the SDK returns the cache miss and the call falls back to the source. The SDK invokes it repeatedly while the model downloads, each time passing `{ percentage, downloaded, total }`. `step` and `totalSteps` tell you the current step and how many steps remain. We set `deferLoading: true` on the two astrology tools.
 
 #### G3. Vague claims
 
