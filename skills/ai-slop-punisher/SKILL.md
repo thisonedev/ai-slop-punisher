@@ -314,9 +314,9 @@ Ordinary passive is acceptable when the actor is unknown or irrelevant.
 
 #### C5. Rhythmic signs
 
-Words to watch: a clause wedged into the middle of a subject-verb pair, set off by commas or parens. Three-plus consecutive sentences under eight words. "The first wall is... The second wall is..." numbered list in paragraph clothes. "Short sentence. Then another. Then another." parataxis. Every paragraph the same length, same template. A sentence that opens with a backticked reference and never names a verb. A single colon-introduced sentence running a conditional, an action, and a purpose. Parallel doubling: two consecutive sentences, or two clauses joined by a bare "and," with different subjects and a matching sentence shape, often the same verb ("[A] shows X. [B] shows Y." or "[A] stays X, and [B] sets Y") to imply a comparison instead of a comparison word.
+Words to watch: a clause wedged into the middle of a subject-verb pair, set off by commas or parens. Three-plus consecutive sentences under eight words. "The first wall is... The second wall is..." numbered list in paragraph clothes. "Short sentence. Then another. Then another." parataxis. Every paragraph the same length, same template. A sentence that opens with a backticked reference and never names a verb. A single colon-introduced sentence running a conditional, an action, and a purpose. Parallel doubling: two consecutive sentences, or two clauses joined by a bare "and," with different subjects and a matching sentence shape, often the same verb ("[A] shows X. [B] shows Y." or "[A] stays X, and [B] sets Y") to imply a comparison instead of a comparison word. Recap-pivot opener: a piece in a series opens with "The previous [lesson/section/chapter] did X. This one does Y," with the two documents as the grammatical subjects and "this one" as the pivot. It is parallel doubling across a lesson boundary, and it counts even when the two sentence shapes do not match.
 
-Why this is wrong: the prose has a structural rhythm or template that the content does not need. The reader feels the cadence before the meaning. Each pattern is a different way the model imposes a structure on the prose. Parallel doubling in particular borrows the shape of a comparison without the word that would make it one, so the reader has to infer the relationship the sentence never states.
+Why this is wrong: the prose has a structural rhythm or template that the content does not need. The reader feels the cadence before the meaning. Each pattern is a different way the model imposes a structure on the prose. Parallel doubling in particular borrows the shape of a comparison without the word that would make it one, so the reader has to infer the relationship the sentence never states. The recap-pivot opener does the same with two documents. Recapping the previous lesson is ordinary teaching and is not the hit. The hit is the recap written only as a foil for the pivot, with the lessons doing work the reader did (see G2) and "this one" there to mirror "the previous." Name the reader as the actor and join the two sentences with a real connector. In coding-academy lessons, the chapter-transition teaser ("Now that we've done X, we're going to Y") is the allowed form.
 
 Before:
 > The migration succeeded. The team delivered. The release shipped. The cache, which we added in v1.4, sits between the API and the database. To deploy, use the new flag instead of the old one.
@@ -335,6 +335,12 @@ Before:
 
 After:
 > `get_weather` stays in the prompt, while the two astrology tools are deferred with `deferLoading: true`.
+
+Before:
+> The previous lesson started an RPC server that advertises itself on a topic. This one is the client: it finds two of those servers and loads one model across their devices.
+
+After:
+> In the previous lesson, we started an RPC server that advertises itself on a topic. Now we write the client, which finds two of those servers and loads one model across their devices.
 
 #### C6. Repetition and variation
 
