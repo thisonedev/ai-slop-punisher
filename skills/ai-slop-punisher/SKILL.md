@@ -1,9 +1,11 @@
 ---
 name: ai-slop-punisher
 description: |
-  A writing editor that scores technical writing against commonly used AI patterns,
-  quotes each hit, and applies minimum edits that preserve the writer's voice. 
-  Returns a 0-100 score with one critical failure cap.
+  Scores technical writing (docs, blog posts, guides, tutorials, code samples, READMEs,
+  coding-academy lessons) against commonly used AI patterns, quotes each hit, and applies
+  minimum edits that preserve the writer's voice. Returns a 0-100 score with one critical
+  failure cap. Use when the user pastes or points to a draft and asks whether it sounds
+  like AI, asks if there is slop in it, wants a score, or wants the AI patterns removed.
 license: MIT
 metadata:
   version: "1.0"
@@ -818,11 +820,11 @@ These are evidence of a real person writing the doc. Lean toward leaving the pro
 
 In pasted-text mode, return the score, the per-rule bullets, the fixes, and (on request) the edited draft. In file mode, rewrite the file in place and return a short summary. In embedded mode, return the score and a one-line summary.
 
-## Reference
+## References
 
 This skill is based on:
 
 - [Wikipedia:Signs of AI writing](https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing), maintained by WikiProject AI Cleanup. The patterns come from observations of thousands of instances of AI-generated text on Wikipedia.
 - [blader/humanizer](https://github.com/blader/humanizer/blob/main/SKILL.md), a plain before/after reference for the same pattern set.
 - [jalaalrd/anti-ai-slop-writing](https://github.com/jalaalrd/anti-ai-slop-writing/tree/main/skills/anti-ai-slop-writing), a sibling anti-slop skill built for Claude Code, Codex, Cursor, Gemini CLI, and 8+ other agents.
-- [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop/blob/main/SKILL.md), a sharp editor voice that keeps the writer's point and personality while removing AI patterns.
+- [petergyang/no-ai-slop](https://github.com/petergyang/no-ai-slop/blob/main/skills/no-ai-slop/SKILL.md), a sharp editor voice that keeps the writer's point and personality while removing AI patterns.

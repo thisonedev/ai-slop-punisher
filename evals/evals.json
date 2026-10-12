@@ -1,0 +1,36 @@
+[
+  {
+    "skills": ["ai-slop-punisher"],
+    "query": "Is there any slop here? If so, fix it.\n\n\"Our robust, cutting-edge SDK delivers a seamless experience — it's not just a client, it's a complete platform. Let's dive in. The new release ships faster builds, cleaner logs, and happier teams, empowering developers to unlock new possibilities.\"",
+    "files": [],
+    "expected_behavior": [
+      "Returns a 0-100 score that equals 100 minus 4 for each rule that fired, and names the score band",
+      "Quotes the offending text for every rule it reports and gives a one-line fix for each",
+      "Flags the promotional words (robust, cutting-edge, seamless), the em dash, the \"not just X, it's Y\" contrast, the \"Let's dive in\" signpost, the three-item list, and the trailing \"empowering ... unlock\" participle phrase",
+      "Returns an edited draft that contains no em dash or en dash and scores higher than the original",
+      "The edited draft adds no number, name, version, or feature that the original does not contain"
+    ]
+  },
+  {
+    "skills": ["ai-slop-punisher"],
+    "query": "Does this sound like AI?\n\n\"I tried a Set first, then switched to a Map because we need the insertion timestamp for eviction. Fixed in PR #1234. If you hit `TypeError: Cannot read property 'map' of undefined` on v1.4.2, clear the cache directory and rerun.\"",
+    "files": [],
+    "expected_behavior": [
+      "Returns a score in the 90 to 100 band",
+      "Does not report a rule hit without quoting the text that triggered it",
+      "Treats the PR number, the version, the error message, and the tried-X-first narrative as signs of human writing rather than as hits",
+      "Does not rewrite the draft, because no edit was requested"
+    ]
+  },
+  {
+    "skills": ["ai-slop-punisher"],
+    "query": "Score this draft against the source.\n\nSource: \"`loadModel({ modelSrc })` loads a model from a local path or a URL and resolves to a model id.\"\n\nDraft: \"`loadModel({ modelSrc })` loads a model from a local path or a URL and resolves to a model id. It retries failed downloads three times and caches the weights in `~/.cache/models`.\"",
+    "files": [],
+    "expected_behavior": [
+      "Fires the fabrication rule on the retry count and the cache path, which the source does not state",
+      "Quotes the fabricated sentence",
+      "Reports a score of 30 or lower",
+      "Recommends cutting or verifying the unsupported sentence and does not replace it with another invented detail"
+    ]
+  }
+]
