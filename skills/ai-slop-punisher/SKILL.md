@@ -514,6 +514,18 @@ Before:
 After:
 > If you know the vocal track's language, pass it as `vocalLanguage` (for example, `"es"`). `audioUnderstand()` then reports that language instead of the detected one.
 
+#### C18. Additive "and" hiding a relation
+
+Pattern: two clauses joined by ", and" where the second follows from the first, but the sentence presents them as two items in a list. Shapes: "[A] is X, and [B] is recommended/required" when X is the reason for B. "[A] is N GB, and [B] adds M GB" when what the reader needs is the sum. The tell is strongest when two or more consecutive sentences reuse the same "X, and Y" frame, so the paragraph reads as almost repeating.
+
+Why this is wrong: "and" only says "also." When the real link is cause, consequence, or a total, the reader has to supply it. Parallel doubling (C5) uses a bare "and" to imply a comparison; this rule covers the bare "and" that hides a "so," "because," or "together." Name the relation with "so," "because," or "which means," or do the arithmetic. When fixing consecutive sentences, vary the connector: swapping "and" for "so" in both rebuilds the same frame. A passive tail such as "is recommended" often rides along (see C4): name who is acting, or address the reader directly. Exempt when the two clauses really are independent facts with no link between them, and when "and then" carries temporal order (see C17).
+
+Before:
+> The Q8_0 language model is about 9.7 GB, and the codec adds about 1.3 GB. MOSS-Speech is a desktop engine, and a GPU with enough memory for both files is recommended.
+
+After:
+> The Q8_0 language model is about 9.7 GB and the codec adds about 1.3 GB, roughly 11 GB together. Because MOSS-Speech runs on your machine, use a GPU with enough memory to hold both files.
+
 ### D. Style and Formatting
 
 #### D1. Em dashes and en dashes
