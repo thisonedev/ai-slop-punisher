@@ -526,6 +526,18 @@ Before:
 After:
 > The Q8_0 language model is about 9.7 GB and the codec adds about 1.3 GB, roughly 11 GB together. Because MOSS-Speech runs on your machine, use a GPU with enough memory to hold both files.
 
+#### C19. "Load" as an event noun
+
+Pattern: the verb "load" turned into a countable noun for one occurrence of loading: "never stops a load," "fails the load," "before each load," "a second load reuses the cache." The thing being loaded is usually missing, so "a load" stands in for "loading the model" or "the model load."
+
+Why this is wrong: in ordinary English "a load" is a quantity (a load of laundry, a heavy load), so the reader stalls before mapping it back to the action. A developer saying this out loud uses the verb: "doesn't stop the model from loading," "loading fails." Rewrite with "load" or "loading" as a verb and name what is being loaded. Exempt established compound terms where "load" is the standard noun: "page load," "load time," "CPU load," "server load," "load balancer," "lazy load," "load average," and "load" as a physical or electrical quantity.
+
+Before:
+> `unknown` never stops a load.
+
+After:
+> An `unknown` result never stops the model from loading.
+
 ### D. Style and Formatting
 
 #### D1. Em dashes and en dashes
