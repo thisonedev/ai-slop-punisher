@@ -119,7 +119,7 @@ After:
 
 #### A4. Vague attributions and knowledge-cutoff hedges
 
-Words to watch: experts believe, experts agree, industry reports, observers have cited, some critics argue, several sources, studies show, widely regarded as, many argue, it's well known that, as of my last update, based on available information, up to my last training update, while specific details are limited.
+Words to watch: experts believe, experts agree, industry reports, observers have cited, some critics argue, several sources, studies show, widely regarded as, many argue, it's well known that, is known to, is known to need, is known to be (a passive with no source: known by whom, and stored where?), as of my last update, based on available information, up to my last training update, while specific details are limited.
 
 Why this is wrong: an opinion is borrowed from a vague authority, or a missing piece in the source is dressed up. The sentence has no real source behind it.
 
@@ -133,15 +133,15 @@ If a real source exists, name it. The rewrite does not invent one to make a sent
 
 #### A5. Placeholder abstractions
 
-Words to watch: shape (as placeholder, not literal geometry or real identifiers like `array.shape`), gap, gaps, blast radius, attack surface, as mentioned above, click here, the trade (as casual shorthand for trade-off, trading-floor slang: "what's the trade here?"), knobs (as placeholder for parameters, settings, or configuration options; not a literal hardware dial or UI control a person turns), surface, canonical surface, API surface (as a placeholder for a specific field, property, endpoint, or return value, borrowed from API-design jargon without naming the thing itself). Distinct from "attack surface" above, a real security term that is still vague without specifics. empty air (a poetic stand-in for a specific missing-input state, such as no argument, a silent or zero-filled buffer, or text-only conditioning with no audio input) → name the actual state instead.
+Words to watch: shape (as placeholder, not literal geometry or real identifiers like `array.shape`), gap, gaps, blast radius, attack surface, as mentioned above, click here, the trade (as casual shorthand for trade-off, trading-floor slang: "what's the trade here?"), knobs (as placeholder for parameters, settings, or configuration options; not a literal hardware dial or UI control a person turns), surface, canonical surface, API surface (as a placeholder for a specific field, property, endpoint, or return value, borrowed from API-design jargon without naming the thing itself). Distinct from "attack surface" above, a real security term that is still vague without specifics. empty air (a poetic stand-in for a specific missing-input state, such as no argument, a silent or zero-filled buffer, or text-only conditioning with no audio input) → name the actual state instead. floor, ceiling, footprint (as metaphors for a memory, size, or resource number: "a computed floor," "the model's footprint") → minimum memory requirement, maximum size, memory use, or the number itself. Exempt for literal math (`Math.floor`, a floor function) and established terms like "memory footprint" when the sentence also gives the value. Coined label, then a colon definition: a sentence introduces a metaphor and immediately defines it after a colon ("falls back to a computed floor: the smallest footprint the model is known to need"). Use the definition and drop the label.
 
-Why this is wrong: the word sounds like a stand-in for a specific effect. The next reader has to translate the placeholder back into a real word. "Shape" is the model reaching for a vague abstract noun. "Gap" hides a concrete failure. "Blast radius" is a metaphor where a literal number would do. "Click here" is a CTA with no destination. "The trade" borrows financial jargon to gesture at a cost/benefit pair without naming either side. "Knobs" borrows a physical-dial image to gesture at a set of parameters without naming any of them. "Surface" borrows API-design jargon to gesture at a field, property, or endpoint without naming it. "Empty air" dresses up a specific missing-input state as a poetic image instead of saying what's actually absent: an argument, a buffer, an audio input.
+Why this is wrong: the word sounds like a stand-in for a specific effect. The next reader has to translate the placeholder back into a real word. "Shape" is the model reaching for a vague abstract noun. "Gap" hides a concrete failure. "Blast radius" is a metaphor where a literal number would do. "Click here" is a CTA with no destination. "The trade" borrows financial jargon to gesture at a cost/benefit pair without naming either side. "Knobs" borrows a physical-dial image to gesture at a set of parameters without naming any of them. "Surface" borrows API-design jargon to gesture at a field, property, or endpoint without naming it. "Empty air" dresses up a specific missing-input state as a poetic image instead of saying what's actually absent: an argument, a buffer, an audio input. "Floor" and "footprint" turn a plain number into architecture and a shoe print. When a label needs a colon definition right after it, the writer already knows the plain words, and the label only adds a translation step. The definition often brings its own metaphor too ("floor: the smallest footprint").
 
 Before:
-> There's a documentation gap. Use the blast radius check to find impacted callers. As mentioned above, click here for details. There are a few knobs you can tune to control the batch size. `result.final` is the canonical surface for the aggregate. It's time to feed AudioGen an existing track instead of empty air.
+> There's a documentation gap. Use the blast radius check to find impacted callers. As mentioned above, click here for details. There are a few knobs you can tune to control the batch size. `result.final` is the canonical surface for the aggregate. It's time to feed AudioGen an existing track instead of empty air. Where the fitter can't run, the SDK falls back to a computed floor: the smallest footprint the model is known to need.
 
 After:
-> Users can't find the auth docs. The migration tool's `--impacted` flag lists every caller that imports the changed module. See the addons overview. The `batchSize` and `maxConcurrency` parameters control batching. Read the aggregate from `result.final`. It's time to feed AudioGen an existing track instead of generating from the caption alone.
+> Users can't find the auth docs. The migration tool's `--impacted` flag lists every caller that imports the changed module. See the addons overview. The `batchSize` and `maxConcurrency` parameters control batching. Read the aggregate from `result.final`. It's time to feed AudioGen an existing track instead of generating from the caption alone. If the fitter can't run, the SDK uses the model's minimum memory requirement from its manifest.
 
 #### A6. Restating assumed-known mechanics
 
@@ -159,6 +159,18 @@ After:
 > for await (const chunk of session) { ... }
 > ```
 > (The prose states only what's new, that the call resolves to a `session`. The code shows the await/for-await mechanic without narrating it.)
+
+#### A7. Synonym glosses
+
+Pattern: a sentence that defines a name, flag, enum value, or status by rewording what the name already says: "Treat `unknown` as "can't say."" "`retry: true` makes it retry." "`isReady` tells you whether it's ready." Often phrased as a "treat X as Y" directive.
+
+Why this is wrong: the gloss looks like documentation but carries no information the identifier didn't. The reader still doesn't know the two things they need: what condition produces the value, and what to do when they get it. A "treat X as" directive makes it worse, since it reads like an instruction while giving nothing to act on. Rewrite with the trigger condition and the expected handling. If the writer doesn't know either, the gloss is hiding a gap, so flag it rather than inventing the condition (see G1). Exempt when the name is an abbreviation, a domain term, or a misleading name the gloss corrects ("`dry` means the command prints the plan without applying it").
+
+Before:
+> The result is one of three values: `likely-fits`, `likely-too-large`, or `unknown`. Treat `unknown` as "can't say."
+
+After:
+> The result is one of three values: `likely-fits`, `likely-too-large`, or `unknown`. `unknown` means the device didn't report available memory, so try the load and handle the out-of-memory error.
 
 ### B. AI Vocabulary
 
@@ -245,6 +257,7 @@ These words appear far more often in post-2023 text and tend to cluster. They ar
 > unprecedented → first, new
 > utilize → use
 > valuable (as filler) → useful
+> verdict, verdicts (for a status, result, or return value of a check, function, or tool) → result, status, value, or name the value. Exempt for a real judgment by a person or body (a jury's verdict, a reviewer's verdict on a PR)
 > vibrant → bright, energetic
 > whilst → while
 
@@ -266,19 +279,23 @@ After:
 
 #### C2. Negative parallelisms
 
-Patterns to watch: a first clause that sets up a foil, and a second clause that delivers the real point. Common shapes include "not just X, but Y" and "X rather than Y" and "It's not just about X, it's Y." The tailing-negation fragment is a sibling: a "no guessing" or "no wasted motion" stuck on at the end of a sentence. Its positive counterpart, the comma-appended scope tail (", on every request"), is under C13. A further variant restates a restrictive "just" or "only" with a redundant negative tail: "produces just the translated string, nothing else."
+Patterns to watch: a first clause that sets up a foil, and a second clause that delivers the real point. Common shapes include "not just X, but Y" and "X rather than Y" and "It's not just about X, it's Y." The tailing-negation fragment is a sibling: a "no guessing" or "no wasted motion" stuck on at the end of a sentence. Its positive counterpart, the comma-appended scope tail (", on every request"), is under C13. A further variant restates a restrictive "just" or "only" with a redundant negative tail: "produces just the translated string, nothing else." A cross-sentence variant splits the foil and the point into two sentences: "These values don't hedge the way `likely-fits` does. The check measured this file against this device." The first sentence defines the subject by what a different thing does, and the second sentence carries the real claim.
 
-Why this is wrong: the construction sets up a fake contrast to make the second clause stick. A real point does not need a foil. In the redundant-tail variant, "nothing else" says the same thing "just" already said, just louder.
+Why this is wrong: the construction sets up a fake contrast to make the second clause stick. A real point does not need a foil. In the redundant-tail variant, "nothing else" says the same thing "just" already said, just louder. In the cross-sentence variant, the reader has to recall what the comparison target meant before learning anything about the subject. State the subject's property directly, and name the contrast only if the reader needs it.
 
 Before:
 > It's not just a linter, it's a complete code quality platform. The options come from the selected item, no guessing.
 >
 > The stream produces just the translated string, nothing else.
+>
+> These values don't hedge the way `likely-fits` does. The check measured this file against this device.
 
 After:
 > The tool catches both syntax errors and unused imports. The CLI prints the full path of every match.
 >
 > The stream produces only the translated string.
+>
+> These values are measured: the check ran this file on this device. `likely-fits` is only an estimate.
 
 #### C3. Rule of three and tricolons
 
@@ -775,9 +792,9 @@ After:
 
 #### G2. Anthropomorphization
 
-Patterns: the model sees, the model decides, the model thinks, the model wants, the model knows, the model chooses. "As an AI," "as a language model," "I am a large language model." Hallucinate, hallucinates, hallucinated. Beyond the model: hands, hands us, hands back, gives us, gives you (as a human handing gesture standing in for a non-human software component, such as an SDK, a function, or a callback, passing or returning a value) → use passes, invokes with, calls back with, returns instead. where the model is, how far the model has to go, the model is at step N (a spatial or journey metaphor for a progress counter) → name the counter directly (current step, steps remaining, step N of M). sets, declares, opts in, asks for (a tool definition, config object, or route described as performing the configuration a developer wrote: "the two tools set `deferLoading: true`") → name the developer as the actor (we set, you set) or state the resulting property (is deferred with, has). Exempt when the code performs the action at runtime (a constructor that sets a field, a module that registers itself on import).
+Patterns: the model sees, the model decides, the model thinks, the model wants, the model knows, the model chooses. "As an AI," "as a language model," "I am a large language model." Hallucinate, hallucinates, hallucinated. Beyond the model: hands, hands us, hands back, gives us, gives you (as a human handing gesture standing in for a non-human software component, such as an SDK, a function, or a callback, passing or returning a value) → use passes, invokes with, calls back with, returns instead. where the model is, how far the model has to go, the model is at step N (a spatial or journey metaphor for a progress counter) → name the counter directly (current step, steps remaining, step N of M). sets, declares, opts in, asks for (a tool definition, config object, or route described as performing the configuration a developer wrote: "the two tools set `deferLoading: true`") → name the developer as the actor (we set, you set) or state the resulting property (is deferred with, has). Exempt when the code performs the action at runtime (a constructor that sets a field, a module that registers itself on import). hedges, doesn't hedge, commits to, is confident (a value, label, or result described as taking an epistemic stance: "these values don't hedge") → say whether the value is measured or estimated, and by what.
 
-Why this is wrong: the model is described as a person with intentions. The next sampled token is not a decision. The prompt including the image is not the model seeing it. State the concrete event. Drop the imagined inner life. The same failure extends past "the model": an SDK or callback described as "handing" data to a person borrows a social gesture for a mechanical invocation. Name the mechanism instead. "Where the model is" and "how far it has to go" borrow a journey for a plain progress counter: the model has no location and no road ahead of it, only a step count. A tool definition that "sets" its own flag is the same borrowing applied to static configuration: the definition is data, the developer wrote the flag, and the active verb hides who did.
+Why this is wrong: the model is described as a person with intentions. The next sampled token is not a decision. The prompt including the image is not the model seeing it. State the concrete event. Drop the imagined inner life. The same failure extends past "the model": an SDK or callback described as "handing" data to a person borrows a social gesture for a mechanical invocation. Name the mechanism instead. "Where the model is" and "how far it has to go" borrow a journey for a plain progress counter: the model has no location and no road ahead of it, only a step count. A tool definition that "sets" its own flag is the same borrowing applied to static configuration: the definition is data, the developer wrote the flag, and the active verb hides who did. A value that "hedges" borrows a writer's caution: a number has no confidence of its own, only a source (a measurement or an estimate) that the sentence should name.
 
 Before:
 > The model sees the image and decides whether to call the tool. The LLM hallucinates the cache key when the key is missing. The SDK invokes it repeatedly while the model downloads, each time handing us `{ percentage, downloaded, total }`. `step` and `totalSteps` tell you where the model is and how far it has to go. The two astrology tools set `deferLoading: true`.
